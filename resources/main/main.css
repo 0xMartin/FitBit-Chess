@@ -1,0 +1,15 @@
+#play #text {
+  text-buffer: "PLAY";
+}
+
+.application-fill { 
+  fill: #001160; 
+}
+
+.foreground-fill { 
+  fill: fb-white; 
+}
+
+.background-fill {
+  fill: fb-white; 
+}

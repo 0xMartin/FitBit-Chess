@@ -1,0 +1,22 @@
+{
+  "devDependencies": {
+    "@fitbit/sdk": "~6.0.0"
+  },
+  "fitbit": {
+    "appUUID": "400c3b40-0ea2-49e9-b75f-4d43a44d2fa9",
+    "appType": "app",
+    "appDisplayName": "Chess",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "#3f51b5",
+    "requestedPermissions": [],
+    "buildTargets": [
+      "atlas"
+    ],
+    "i18n": {
+      "en-US": {
+        "name": "Chess"
+      }
+    },
+    "defaultLanguage": "en-US"
+  }
+}

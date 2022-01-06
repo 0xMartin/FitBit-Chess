@@ -1,0 +1,12 @@
+<svg>
+  <defs>
+    <link rel="stylesheet" href="game/game.css" />
+    <link rel="stylesheet" href="main/main.css" />
+    
+    <link rel="import" href="/mnt/sysassets/system_widget.defs" />
+    <link rel="import" href="/mnt/sysassets/widgets/text_button.defs" />
+    
+    <link rel="import" href="game/game.gui" />
+    <link rel="import" href="main/main.gui" />
+  </defs>
+</svg>

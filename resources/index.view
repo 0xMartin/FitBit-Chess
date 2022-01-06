@@ -1,0 +1,4 @@
+<svg>
+  <use id="view_main" href="#main" display="inline" /> 
+  <use id="view_game" href="#game_board" display="none" /> 
+</svg>

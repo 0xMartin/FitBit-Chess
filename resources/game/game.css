@@ -1,0 +1,111 @@
+.black_field {
+  fill: #868686; 
+}
+
+.white_field {
+  fill: #E5E5E5; 
+}
+.board_outline {
+  fill: #242424; 
+}
+
+.bg_white_on_turn {
+  gradient-color1: #050505;
+  gradient-color2: #090943;
+}
+
+.bg_black_on_turn {
+  gradient-color1: #430909;
+  gradient-color2: #050505;
+}
+
+.possible_move {
+  fill: #77BB88;   
+}
+
+.king_danger {
+  fill: #882233;   
+}
+
+.field {
+  width: 12%;
+  height: 12%;
+}
+
+.white_figure {
+  width: 12%;
+  height: 12%; 
+  pointer-events: "visible";
+}
+
+.black_figure {
+  width: 12%;
+  height: 12%; 
+  pointer-events: "visible";
+}
+
+#info {
+  x: "50%";
+  y: "50%+15";
+  font-family: "System-Regular"; 
+  fill: blue;
+  font-size: "30"; 
+  font-weight: "bold";
+  text-anchor: "middle";
+  display: "none";
+}
+
+
+/*WHITE FIGURES */
+
+.white_figure.pawn {
+  href: "img/pawn_white.png";
+}
+
+.white_figure.rook {
+  href: "img/rook_white.png";  
+}
+
+.white_figure.knight {
+  href: "img/knight_white.png";  
+}
+
+.white_figure.bishop {
+  href: "img/bishop_white.png";  
+}
+
+.white_figure.king {
+  href: "img/king_white.png";  
+}
+
+.white_figure.queen {
+  href: "img/queen_white.png";  
+}
+
+
+/*BLACK FIGURES */
+
+.black_figure.pawn {
+  href: "img/pawn_black.png";
+}
+
+.black_figure.rook {
+  href: "img/rook_black.png";  
+}
+
+.black_figure.knight {
+  href: "img/knight_black.png";  
+}
+
+.black_figure.bishop {
+  href: "img/bishop_black.png";  
+}
+
+.black_figure.king {
+  href: "img/king_black.png";  
+}
+
+.black_figure.queen {
+  href: "img/queen_black.png";  
+}
+
