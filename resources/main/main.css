@@ -1,9 +1,5 @@
-#play #text {
-  text-buffer: "PLAY";
-}
-
 .application-fill { 
-  fill: #001160; 
+  fill: #112299; 
 }
 
 .foreground-fill { 
@@ -12,4 +8,12 @@
 
 .background-fill {
   fill: fb-white; 
+}
+
+#button_play #text {
+  text-buffer: "PLAY";
+}
+
+#button_ai #text {
+  text-buffer: "AI";
 }

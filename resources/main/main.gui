@@ -15,9 +15,10 @@
       <text x="50%" y="30%"
             font-family="System-Regular" fill="white"
             font-size="50" font-weight="bold"
-            text-anchor="middle">Chess</text>
+            text-anchor="middle">CHESS</text>
       
-      <use id="play" href="#text-button" class="text-button bottom application-fill" />
+      <use id="button_ai" href="#text-button" class="text-button bottom left secondary application-fill" />
+      <use id="button_play" href="#text-button" class="text-button bottom right application-fill" />
       
     </svg>
   </symbol>  

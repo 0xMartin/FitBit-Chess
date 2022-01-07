@@ -12,6 +12,8 @@ export function xyToIndexPosition(x, y) {
 }
 
 export function setFigurePosition(element, x, y) {
+  if(element == null) return;
+  
   if(x < 0 || y < 0 || x > 8 || y > 8) {
     return;
   }  
@@ -25,6 +27,8 @@ export function updateFigurePosition(figure) {
 }
 
 export function addClass(element, class_name) {
+  if(element == null) return;
+  
   if(element.class.length == 0) {
     element.class = class_name;
   } else {
@@ -33,6 +37,8 @@ export function addClass(element, class_name) {
 } 
 
 export function removeClass(element, class_name) {
+  if(element == null) return;
+  
   const classes = element.class.split(" ").filter(c => c != class_name);
   element.class = classes.join(" ").trim();
 } 

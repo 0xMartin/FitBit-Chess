@@ -1,11 +1,14 @@
 import * as document from "document";
 
 import * as utils from "./utils";
-import * as figure from "./figure";
 import * as player from "./player";
+import * as figure from "../../common/figure";
+import * as comm from "../../common/communication";
 
 
+//control
 export var event_game_end = null;
+var ai_enabled = false;
 
 
 const bg = document.getElementById("bg");
@@ -23,6 +26,7 @@ var onturn = null;
 
 function addFigureToGame(player, figure) {
   player.addFigure(figure);
+  figure.element.style.display = "inline";
   utils.updateFigurePosition(figure);    
 }
 
@@ -34,19 +38,19 @@ function unselectAllMosibleFields() {
   }
 }
 
-function doMove(selected_figure, mov) {
+function doMove(selected_fig, mov) {
   //safe position if undo turn is needed
-  const last = {x: selected_figure.x, y: selected_figure.y};
+  const last = {x: selected_fig.x, y: selected_fig.y};
   
   //move with figure
-  selected_figure.x = mov.x;
-  selected_figure.y = mov.y;
+  selected_fig.x = mov.x;
+  selected_fig.y = mov.y;
   
   //find king
   var king = {x: 0, y: 0};
-  if(selected_figure.type == figure.KING) {
-    king.x = selected_figure.x;
-    king.y = selected_figure.y;
+  if(selected_fig.type == figure.KING) {
+    king.x = selected_fig.x;
+    king.y = selected_fig.y;
     
     //remove "king danger" highlight
     utils.removeClass(fields[last.x + last.y * 8], "king_danger");
@@ -62,12 +66,12 @@ function doMove(selected_figure, mov) {
   
   if(stat == true) {
     //undo turn
-    selected_figure.x = last.x;
-    selected_figure.y = last.y;  
+    selected_fig.x = last.x;
+    selected_fig.y = last.y;  
     
-    if(selected_figure.type == figure.KING) {
-      king.x = selected_figure.x;
-      king.y = selected_figure.y;
+    if(selected_fig.type == figure.KING) {
+      king.x = selected_fig.x;
+      king.y = selected_fig.y;
     }
     
     //highlight field where si king
@@ -79,11 +83,16 @@ function doMove(selected_figure, mov) {
     if(onturn == white_player) {
       onturn = black_player;
       bg.class = "bg_black_on_turn";
+      
+      if(ai_enabled) {
+         comm.sendBoardData(white_player.figures, black_player.figures);
+      }
+      
     } else {
       onturn = white_player;  
       bg.class = "bg_white_on_turn";
     }
-    
+
     return true;
   }
 }
@@ -92,16 +101,18 @@ function figureEvent(fig, player) {
   if(onturn == null) return;
   
   if(onturn.color == player.color) {
-    //select figure of current player (find all posible moves with this figure)
-    
-    selected_figure = fig;
-    //unselect all
-    unselectAllMosibleFields();
-    //find possible moves for figure and highlight all this field on the board
-    possible_moves = figure.getPosibleMoves(player.color, fig, white_player, black_player);
-    possible_moves.forEach((m) => {
-      utils.addClass(fields[m.x + m.y * 8], "possible_move");
-    });
+    if(!ai_enabled || onturn == white_player) {
+      //select figure of current player (find all posible moves with this figure)
+
+      selected_figure = fig;
+      //unselect all
+      unselectAllMosibleFields();
+      //find possible moves for figure and highlight all this field on the board
+      possible_moves = figure.getPosibleMoves(player.color, fig, white_player, black_player);
+      possible_moves.forEach((m) => {
+        utils.addClass(fields[m.x + m.y * 8], "possible_move");
+      });
+    }
   } else {    
     //do move with other figure and kill this "fig" figure
     if(selected_figure == null) return;
@@ -119,6 +130,7 @@ function figureEvent(fig, player) {
           //undo kill (set last position of figure again, add to player list)
           fig.x = mov.x;
           fig.y = mov.y;
+          fig.element.style.display = "inline";
           player.addFigure(fig);
         }
         utils.updateFigurePosition(selected_figure);
@@ -182,6 +194,7 @@ function checkGameEnd() {
     info.text = (onturn == white_player ? black_player : white_player).name + " win!";
     onturn = null;
     
+    //return back to main menu
     setTimeout(() => {
       info.style.display = "none"; 
       if(event_game_end != null) {
@@ -306,9 +319,83 @@ export function init() {
       } 
     });
   });
+  
+  //reset highlights
+  fields.forEach((f) => {
+    utils.removeClass(f, "king_danger");
+  });
 }
 
 export function run() {
   //RUN GAME
   onturn = white_player;  
 }
+
+
+
+//###################################################################################################################
+// AI
+//###################################################################################################################
+
+export function enableAI() {
+  ai_enabled = true;  
+}
+
+export function disableAI() {
+  ai_enabled = false;  
+}
+
+comm.receivMsgEvt = function (evt) {
+  if(ai_enabled) {
+    if(onturn == black_player) {
+      const move = evt.data;
+      const from = move.from;
+      const to = move.to;
+         
+      const fig = figure.getFigureOnPosition(from.x, from.y, white_player, black_player);
+      
+      var error = false;    
+      if(fig != null) {
+        //remove figure (only in attack)
+        const enemy_fig = figure.getFigureOnPosition(to.x, to.y, white_player, black_player);
+        if(enemy_fig != null) {
+          if(enemy_fig.color == white_player.color) {
+            //kill figure
+            utils.killFigure(enemy_fig.figure, white_player);  
+          }
+        }
+        
+        //do move
+        if(doMove(fig.figure, to)) {
+          utils.updateFigurePosition(fig.figure);  
+        } else {
+          error = true;
+        }     
+        
+      } else {
+        error = true;
+      }
+      
+      if(error) {
+        console.log("!!! AI ERROR !!!");
+        //error 
+        //stop game
+        info.style.display = "inline";  
+        info.text ="AI give up!";
+        onturn = null;
+
+        //return back to main menu
+        setTimeout(() => {
+          info.style.display = "none"; 
+          if(event_game_end != null) {
+            event_game_end();  
+          }
+        }, 5000);
+      }
+      
+    }
+  }
+}
+
+
+

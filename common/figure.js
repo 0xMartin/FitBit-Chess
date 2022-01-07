@@ -1,6 +1,6 @@
 //COLOR OF FIGURE
-const COLOR_WHITE = 0;
-const COLOR_BLACK = 1;
+export const COLOR_WHITE = 0;
+export const COLOR_BLACK = 1;
 
 
 //TYPE OF FIGURE
