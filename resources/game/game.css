@@ -30,15 +30,10 @@
 .field {
   width: 12%;
   height: 12%;
-}
-
-.white_figure {
-  width: 12%;
-  height: 12%; 
   pointer-events: "visible";
 }
 
-.black_figure {
+.figure {
   width: 12%;
   height: 12%; 
   pointer-events: "visible";
@@ -57,55 +52,54 @@
 
 
 /*WHITE FIGURES */
-
-.white_figure.pawn {
+.figure.w_pawn {
   href: "img/pawn_white.png";
 }
 
-.white_figure.rook {
+.figure.w_rook {
   href: "img/rook_white.png";  
 }
 
-.white_figure.knight {
+.figure.w_knight {
   href: "img/knight_white.png";  
 }
 
-.white_figure.bishop {
+.figure.w_bishop {
   href: "img/bishop_white.png";  
 }
 
-.white_figure.king {
+.figure.w_king {
   href: "img/king_white.png";  
 }
 
-.white_figure.queen {
+.figure.w_queen {
   href: "img/queen_white.png";  
 }
 
 
 /*BLACK FIGURES */
 
-.black_figure.pawn {
+.figure.b_pawn {
   href: "img/pawn_black.png";
 }
 
-.black_figure.rook {
+.figure.b_rook {
   href: "img/rook_black.png";  
 }
 
-.black_figure.knight {
+.figure.b_knight {
   href: "img/knight_black.png";  
 }
 
-.black_figure.bishop {
+.figure.b_bishop {
   href: "img/bishop_black.png";  
 }
 
-.black_figure.king {
+.figure.b_king {
   href: "img/king_black.png";  
 }
 
-.black_figure.queen {
+.figure.b_queen {
   href: "img/queen_black.png";  
 }
 

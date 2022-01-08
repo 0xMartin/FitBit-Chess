@@ -20,18 +20,7 @@ export function isConnected() {
 }
 
 
-export function sendBoardData(white_figures, black_figures) {
-  var board = [];
-  
-  //figure: {x, y, color, type}
-  
-  white_figures.forEach((fig) => {
-    board.push({x: fig.x, y: fig.y, color: figure.COLOR_WHITE, type: fig.type});  
-  });
-  black_figures.forEach((fig) => {
-    board.push({x: fig.x, y: fig.y, color: figure.COLOR_BLACK, type: fig.type});  
-  });
-  
+export function sendBoardData(board) {
   sendMessage(board);    
 }
 

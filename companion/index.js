@@ -7,7 +7,7 @@ import * as ai from "./ai";
 import * as figure from "../common/figure";
 
 
-const chess_ai = new ai.AI(3, figure.COLOR_BLACK);
+const chess_ai = new ai.AI(3, figure.BLACK);
 
 
 comm.receivMsgEvt = function(evt) {

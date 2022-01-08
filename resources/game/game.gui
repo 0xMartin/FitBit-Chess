@@ -18,112 +18,204 @@
 
         <!-- LINE 1 -->
         <rect x="2%" y="2%" class="white_field field" />
+        <image x="2%" y="2%" class="figure" />
+        
         <rect x="14%" y="2%" class="black_field field" />
+        <image x="14%" y="2%" class="figure" />
+        
         <rect x="26%" y="2%" class="white_field field" />
+        <image x="26%" y="2%" class="figure" />
+        
         <rect x="38%" y="2%" class="black_field field" />
+        <image x="38%" y="2%" class="figure" />
+        
         <rect x="50%" y="2%" class="white_field field" />
+        <image x="50%" y="2%" class="figure" />
+        
         <rect x="62%" y="2%" class="black_field field" />
+        <image x="62%" y="2%" class="figure" />
+        
         <rect x="74%" y="2%" class="white_field field" />
+        <image x="74%" y="2%" class="figure" />
+        
         <rect x="86%" y="2%" class="black_field field" />
+        <image x="86%" y="2%" class="figure" />
+        
         <!-- LINE 2 -->
         <rect x="2%" y="14%" class="black_field field" />
+        <image x="2%" y="14%" class="figure" />
+        
         <rect x="14%" y="14%" class="white_field field" />
+        <image x="14%" y="14%" class="figure" />
+        
         <rect x="26%" y="14%" class="black_field field" />
+        <image x="26%" y="14%" class="figure" />
+        
         <rect x="38%" y="14%" class="white_field field" />
+        <image x="38%" y="14%" class="figure" />
+        
         <rect x="50%" y="14%" class="black_field field" />
+        <image x="50%" y="14%" class="figure" />
+        
         <rect x="62%" y="14%" class="white_field field" />
+        <image x="62%" y="14%" class="figure" />
+        
         <rect x="74%" y="14%" class="black_field field" />
+        <image x="74%" y="14%" class="figure" />
+        
         <rect x="86%" y="14%" class="white_field field" />
+        <image x="86%" y="14%" class="figure" />
+        
         <!-- LINE 3 -->
         <rect x="2%" y="26%" class="white_field field" />
+        <image x="2%" y="26%" class="figure" />
+        
         <rect x="14%" y="26%" class="black_field field" />
+        <image x="14%" y="26%" class="figure" />
+        
         <rect x="26%" y="26%" class="white_field field" />
+        <image x="26%" y="26%" class="figure" />
+        
         <rect x="38%" y="26%" class="black_field field" />
+        <image x="38%" y="26%" class="figure" />
+        
         <rect x="50%" y="26%" class="white_field field" />
+        <image x="50%" y="26%" class="figure" />
+        
         <rect x="62%" y="26%" class="black_field field" />
+        <image x="62%" y="26%" class="figure" />
+        
         <rect x="74%" y="26%" class="white_field field" />
+        <image x="74%" y="26%" class="figure" />
+        
         <rect x="86%" y="26%" class="black_field field" />
+        <image x="86%" y="26%" class="figure" />
+        
         <!-- LINE 4 -->
         <rect x="2%" y="38%" class="black_field field" />
+        <image x="2%" y="38%" class="figure" />
+        
         <rect x="14%" y="38%" class="white_field field" />
+        <image x="14%" y="38%" class="figure" />
+        
         <rect x="26%" y="38%" class="black_field field" />
+        <image x="26%" y="38%" class="figure" />
+        
         <rect x="38%" y="38%" class="white_field field" />
+        <image x="38%" y="38%" class="figure" />
+        
         <rect x="50%" y="38%" class="black_field field" />
+        <image x="50%" y="38%" class="figure" />
+        
         <rect x="62%" y="38%" class="white_field field" />
+        <image x="62%" y="38%" class="figure" />
+        
         <rect x="74%" y="38%" class="black_field field" />
+        <image x="74%" y="38%" class="figure" />
+        
         <rect x="86%" y="38%" class="white_field field" />
+        <image x="86%" y="38%" class="figure" />
+        
         <!-- LINE 5 -->
         <rect x="2%" y="50%" class="white_field field" />
+        <image x="2%" y="50%" class="figure" />
+        
         <rect x="14%" y="50%" class="black_field field" />
+        <image x="14%" y="50%" class="figure" />
+        
         <rect x="26%" y="50%" class="white_field field" />
+        <image x="26%" y="50%" class="figure" />
+        
         <rect x="38%" y="50%" class="black_field field" />
+        <image x="38%" y="50%" class="figure" />
+        
         <rect x="50%" y="50%" class="white_field field" />
+        <image x="50%" y="50%" class="figure" />
+        
         <rect x="62%" y="50%" class="black_field field" />
+        <image x="62%" y="50%" class="figure" />
+        
         <rect x="74%" y="50%" class="white_field field" />
+        <image x="74%" y="50%" class="figure" />
+        
         <rect x="86%" y="50%" class="black_field field" />
+        <image x="86%" y="50%" class="figure" />
+        
         <!-- LINE 6 -->
         <rect x="2%" y="62%" class="black_field field" />
+        <image x="2%" y="62%" class="figure" />
+        
         <rect x="14%" y="62%" class="white_field field" />
+        <image x="14%" y="62%" class="figure" />
+        
         <rect x="26%" y="62%" class="black_field field" />
+        <image x="26%" y="62%" class="figure" />
+        
         <rect x="38%" y="62%" class="white_field field" />
+        <image x="38%" y="62%" class="figure" />
+        
         <rect x="50%" y="62%" class="black_field field" />
+        <image x="50%" y="62%" class="figure" />
+        
         <rect x="62%" y="62%" class="white_field field" />
+        <image x="62%" y="62%" class="figure" />
+        
         <rect x="74%" y="62%" class="black_field field" />
+        <image x="74%" y="62%" class="figure" />
+        
         <rect x="86%" y="62%" class="white_field field" />
+        <image x="86%" y="62%" class="figure" />
+        
         <!-- LINE 7 -->
         <rect x="2%" y="74%" class="white_field field" />
+        <image x="2%" y="74%" class="figure" />
+        
         <rect x="14%" y="74%" class="black_field field" />
+        <image x="14%" y="74%" class="figure" />
+        
         <rect x="26%" y="74%" class="white_field field" />
+        <image x="26%" y="74%" class="figure" />
+        
         <rect x="38%" y="74%" class="black_field field" />
+        <image x="38%" y="74%" class="figure" />
+        
         <rect x="50%" y="74%" class="white_field field" />
+        <image x="50%" y="74%" class="figure" />
+        
         <rect x="62%" y="74%" class="black_field field" />
+        <image x="62%" y="74%" class="figure" />
+        
         <rect x="74%" y="74%" class="white_field field" />
+        <image x="74%" y="74%" class="figure" />
+        
         <rect x="86%" y="74%" class="black_field field" />
+        <image x="86%" y="74%" class="figure" />
+        
         <!-- LINE 8 -->
         <rect x="2%" y="86%" class="black_field field" />
+        <image x="2%" y="86%" class="figure" />
+        
         <rect x="14%" y="86%" class="white_field field" />
+        <image x="14%" y="86%" class="figure" />
+        
         <rect x="26%" y="86%" class="black_field field" />
+        <image x="26%" y="86%" class="figure" />
+        
         <rect x="38%" y="86%" class="white_field field" />
+        <image x="38%" y="86%" class="figure" />
+        
         <rect x="50%" y="86%" class="black_field field" />
+        <image x="50%" y="86%" class="figure" />
+        
         <rect x="62%" y="86%" class="white_field field" />
+        <image x="62%" y="86%" class="figure" />
+        
         <rect x="74%" y="86%" class="black_field field" />
+        <image x="74%" y="86%" class="figure" />
+        
         <rect x="86%" y="86%" class="white_field field" />
-
-        <!-- FIGURES WHITE -->
-        <image class="white_figure pawn" />
-        <image class="white_figure pawn" />
-        <image class="white_figure pawn" />
-        <image class="white_figure pawn" />
-        <image class="white_figure pawn" />
-        <image class="white_figure pawn" />
-        <image class="white_figure pawn" />
-        <image class="white_figure pawn" />
-        <image class="white_figure rook" />
-        <image class="white_figure rook" />
-        <image class="white_figure knight" />
-        <image class="white_figure knight" />
-        <image class="white_figure bishop" />
-        <image class="white_figure bishop" />
-        <image class="white_figure queen" />
-        <image class="white_figure king" />
-
-        <!-- FIGURES BLACK -->
-        <image class="black_figure pawn" />
-        <image class="black_figure pawn" />
-        <image class="black_figure pawn" />
-        <image class="black_figure pawn" />
-        <image class="black_figure pawn" />
-        <image class="black_figure pawn" />
-        <image class="black_figure pawn" />
-        <image class="black_figure pawn" />
-        <image class="black_figure rook" />
-        <image class="black_figure rook" />
-        <image class="black_figure knight" />
-        <image class="black_figure knight" />
-        <image class="black_figure bishop" />
-        <image class="black_figure bishop" />
-        <image class="black_figure queen" />
-        <image class="black_figure king" />
+        <image x="86%" y="86%" class="figure" />
+        
 
         <!-- WIN TAG -->
         <text id="info">WHITE PLAYER WIN</text>   
