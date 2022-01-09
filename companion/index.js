@@ -10,11 +10,13 @@ import * as figure from "../common/figure";
 
 const AI_LEVEL = "ai_level";
 const AI_COLOR = "ai_color";
+const LOAD_FEN = "load_fen";
+const FEN_STR = "fen_str";
 
 
 //AI
 var chess_ai = new ai.AI(parseInt(settingsStorage.getItem(AI_LEVEL)) + 1, 
-                         settingsStorage.getItem('ai_color') == "true");
+                         settingsStorage.getItem(AI_COLOR) == "true");
 
 comm.receivMsgEvt = function(evt) {
   switch(evt.data.type) {
@@ -50,6 +52,10 @@ settingsStorage.addEventListener("change", (evt) => {
       //change color of ai
       chess_ai.color = (evt.newValue == "true");
       comm.sendSettings(chess_ai.color);
+      break;
+    case LOAD_FEN:
+      var fen = JSON.parse(settingsStorage.getItem(FEN_STR)).name;
+      comm.sendFEN(fen);
       break;
   }
 });

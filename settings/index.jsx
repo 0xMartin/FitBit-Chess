@@ -1,3 +1,5 @@
+import * as helper from "./helper";
+
 function ChessSettings(props) {
   return (
     <Page>
@@ -18,6 +20,15 @@ function ChessSettings(props) {
           settingsKey="ai_color"
         />
         <Text>Color: {(props.settingsStorage.getItem('ai_color') == "true") ? "White" : "Black"}</Text>
+        
+        <TextInput
+          label="FEN:"
+          settingsKey="fen_str"
+        />
+        <Button
+          label="Load FEN"
+          onClick={() => props.settingsStorage.setItem('load_fen', 'ok')}
+        />
         
       </Section>
     </Page>

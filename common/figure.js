@@ -73,20 +73,37 @@ export function isInBoard(x, y) {
 export function doMove(move, board) {
   const from = move.from;
   const to = move.to;
+  const from_i = from.x + from.y * 8;
+  const to_i = to.x + to.y * 8;
   
   const killed = board[to.x + to.y * 8]; 
   
   //move figure and kill figure (if some exists)
-  var f = board[from.x + from.y * 8];
-  board[to.x + to.y * 8] =  f;
-  board[from.x + from.y * 8] = EMPTY;
+  var f = board[from_i];
+  board[to_i] =  f;
+  board[from_i] = EMPTY;
   
   //change to queen
   if(isPawn(f)) {
     if(isWhite(f) ? to.y == 0 : to.y == 7) {
-      board[to.x + to.y * 8] = isWhite(f) ? W_QUEEN : B_QUEEN;  
+      board[to_i] = isWhite(f) ? W_QUEEN : B_QUEEN;  
       return {killed: killed, changed_to_queen: true};
     }
+    
+  //castling  
+  } else if(isKing(f)) {
+    if(Math.abs(to.x - from.x) == 2) {
+      //move rook
+      if(to.x - from.x > 0) {
+        //right 
+        board[5 + to.y * 8] = board[7 + to.y * 8];
+        board[7 + to.y * 8] = EMPTY;
+      } else {
+        //left
+        board[3 + to.y * 8] = board[to.y * 8];
+        board[to.y * 8] = EMPTY;
+      } 
+    }      
   }
   
   return {killed: killed, changed_to_queen: false};
@@ -95,17 +112,35 @@ export function doMove(move, board) {
 export function undoMove(move, board, status) {
   const from = move.from;
   const to = move.to;
+  const from_i = from.x + from.y * 8;
+  const to_i = to.x + to.y * 8;
     
   //move figure back
   if(status.changed_to_queen) {
     //if it was pawn that changed to queen then change back queen to pawn
-    board[from.x + from.y * 8] = isWhite(board[to.x + to.y * 8]) ? W_PAWN : B_PAWN;  
+    board[from_i] = isWhite(board[to_i]) ? W_PAWN : B_PAWN;  
   } else {
-    board[from.x + from.y * 8] = board[to.x + to.y * 8];
+    board[from_i] = board[to_i];
+  }
+  
+  //undo castling  
+  if(isKing(board[from_i])) {
+    if(Math.abs(to.x - from.x) == 2) {
+      //move rook
+      if(to.x - from.x > 0) {
+        //right 
+        board[5 + to.y * 8] = board[5 + to.y * 8];
+        board[5 + to.y * 8] = EMPTY;
+      } else {
+        //left
+        board[to.y * 8] = board[3 + to.y * 8];
+        board[3 + to.y * 8] = EMPTY;
+      } 
+    }      
   }
   
   //return killed figure (some figure or empty space)
-  board[to.x + to.y * 8] = status.killed;  
+  board[to_i] = status.killed;  
 }
 
 export function getLegalMoves(fig, board) {
@@ -221,6 +256,23 @@ export function getLegalMoves(fig, board) {
             }
           }
         }  
+      }
+    }
+    //castling
+    if(fig.x == 4) {
+      if((fig_isWhite && fig.y == 7) || (!fig_isWhite && fig.y == 0)) {
+        //left
+        if(isRook(board[fig.y * 8])) {
+          if(isEmpty(board[1 + fig.y * 8]) && isEmpty(board[2 + fig.y * 8]) && isEmpty(board[3 + fig.y * 8])) {
+            moves.push({x: fig.x - 2, y: fig.y});       
+          }   
+        }
+        //right
+        if(isRook(board[7 + fig.y * 8])) {
+          if(isEmpty(board[6 + fig.y * 8]) && isEmpty(board[5 + fig.y * 8])) {
+            moves.push({x: fig.x + 2, y: fig.y});     
+          }   
+        }
       }
     }
     

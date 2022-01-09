@@ -199,6 +199,41 @@ function updateBoard(board) {
   clearFields(true);
 }
 
+
+function loadBoardFromFEN(fen) {
+  var board_index = 0;
+  console.log(": " + fen);
+  
+  for (var i = 0; i < fen.length; i++) {
+    if(board_index > 63) break;
+    
+    var c = fen.charAt(i).toLowerCase();
+    if(c == 'r' || c == 'n' || c == 'b' || c == 'q' || c == 'k' || c == 'p') {
+      board[board_index] = fen.charAt(i); 
+      board_index++;
+    } else if(c == '/') {
+      var padding = (8 - board_index) % 8;
+      for(var j = 0; j < padding; j++) {
+        board[board_index] = ' ';
+        board_index++;  
+      } 
+    } else {
+      const parsed = parseInt(c);
+      if (!isNaN(parsed)) { 
+        for(var j = 0; j < parsed; j++) {
+          board[board_index] = ' ';
+          board_index++;  
+        }    
+      } else {
+        board_index++;  
+      }  
+    }
+    
+  }   
+
+  updateBoard(board);
+}
+
 //###################################################################################################################
 // GAME CONTROL FUNCTIONS
 //###################################################################################################################
@@ -296,6 +331,10 @@ comm.receivMsgEvt = function (evt) {
             comm.sendBoardData(board);
           }
         }
+      break;
+    case comm.FEN:
+      //console.log("FEN: " + evt.data.msg.fen);
+      loadBoardFromFEN(evt.data.msg);
       break;
   }
 }

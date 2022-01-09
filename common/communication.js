@@ -5,6 +5,7 @@ import * as figure from "./figure";
 export const AI_MOVE = "ai_move";
 export const BOARD_DATA = "board_data";
 export const SETTINGS_SYNC = "setting_sync";
+export const FEN = "fen";
 
 
 export var receivMsgEvt = null; 
@@ -40,6 +41,10 @@ export function sendSettings(white) {
 
 export function requestSettingsSync() {
   sendMessage(SETTINGS_SYNC, null);
+}
+
+export function sendFEN(fen) {
+  sendMessage(FEN, fen);    
 }
 
 
