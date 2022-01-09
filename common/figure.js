@@ -1,7 +1,7 @@
 
 //COLOR
-export const WHITE = 0;
-export const BLACK = 1;
+export const WHITE = true;
+export const BLACK = false;
 
 //TYPE OF FIGURE
 export const W_PAWN   = 'P';
@@ -282,7 +282,7 @@ export function kingAttacked(king_isWhite, board) {
   //check attacks 
   var f, offset;
   var x, y;
-  
+    
   //queens & bishops & rooks
   for(var dx = -1; dx <= 1; dx++) {
     for(var dy = -1; dy <= 1; dy++) {
@@ -344,6 +344,7 @@ export function kingAttacked(king_isWhite, board) {
   for(dx = -1, dy = (king_isWhite ? -1 : 1); dx <= 1; dx += 2) {
     x = king.x + dx;
     y = king.y + dy;  
+    if(x < 0 || y < 0 || x > 7 || y > 7) continue;
     
     f = board[x + y * 8];
     if(!isEmpty(f)) {
@@ -353,6 +354,26 @@ export function kingAttacked(king_isWhite, board) {
         }
        }
      }
+  }
+  
+  //king
+  for(dx = -1; dx <= 1; dx++) {
+    for(dy = -1; dy <= 1; dy++) {
+      if(dx != 0 || dy != 0) {
+        x = king.x + dx;
+        y = king.y + dy; 
+        if(x < 0 || y < 0 || x > 7 || y > 7) continue;
+        
+        f = board[x + y * 8];
+        if(!isEmpty(f)) {
+          if(isWhite(f) != king_isWhite) {
+            if(isKing(f)) {
+              return true;
+            }  
+          }
+        }
+      }
+    }
   }
   
   return false;

@@ -51,6 +51,13 @@ function changePlayer() {
       }
     }, 5000);
   }
+  
+  //ai play
+  if(!white_on_turn) {
+    if(ai_enabled) {
+      comm.sendBoardData(board);
+    }
+  }
 }
 
 function clearFields(all) {
@@ -76,7 +83,7 @@ function figure_event(fig) {
   selected_figure = fig;  
   
   //clear fields
-  clearFields();
+  clearFields(false);
   
   //show legfigureal moves
   var moves = figure.getLegalMoves(selected_figure, board);
@@ -122,6 +129,8 @@ function move_event(x, y) {
     
     //unselect figure
     selected_figure = null;
+  } else {
+    clearFields(false);
   }  
 }
 
@@ -224,8 +233,9 @@ export function init() {
   //update board
   updateBoard(board);
   
-  //on turn white
+  //reset
   white_on_turn = true;
+  selected_figure = null;
 }
 
 
@@ -248,7 +258,28 @@ export function disableAI() {
 
 comm.receivMsgEvt = function (evt) {
   if(ai_enabled) {
-    if(onturn == black_player) {
+    if(!white_on_turn) {
+      
+      const from = evt.data.from;
+      const to = evt.data.to;
+  
+      selected_figure = new figure.Figure(from.x, from.y, board[from.x + from.y * 8]);
+      if(!move_event(to.x, to.y)) {
+        //error 
+        console.log("!!! AI ERROR !!!");
+        console.log("[" + from.x + ", " + from.y + "] -> [" + to.x + ", " + to.y + "]");
+        //stop game
+        info.style.display = "inline";  
+        info.text ="AI give up!";
+        white_on_turn = true;
+        //return back to main menu
+        setTimeout(() => {
+          info.style.display = "none"; 
+          if(event_game_end != null) {
+            event_game_end();  
+          }
+        }, 5000);  
+      }
       
     }
   }
