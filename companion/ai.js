@@ -7,6 +7,7 @@ export class AI {
   constructor(depth, color) {
     this.depth = depth;
     this.color = color;
+    console.log("AI depth: " + depth + ", Color: " + (color ? "white" : "black"));
   }
   
   updateBoard(board) {
@@ -211,8 +212,8 @@ function evaluateBoard(board, color) {
   var value = 0;
  
   var fig;
-  for(var index = 0; index < 64; index++) {
-      fig = board[index];
+  for(var i = 0; i < 64; i++) {
+      fig = board[i];
       if(fig == ' ') continue;
       
       var type = fig.toLowerCase(); 
@@ -225,10 +226,11 @@ function evaluateBoard(board, color) {
         value += FIGURE_VALUE[type];  
         //position score
         if(isWhite) {
-          value += POSITION_SCORE_W[type][index];
+          value += POSITION_SCORE_W[type][i];
         } else {
-          value += POSITION_SCORE_B[type][index]; 
+          value += POSITION_SCORE_B[type][i]; 
         }
+        
       } else {
         //ENEMY (negative values)
         
@@ -236,13 +238,13 @@ function evaluateBoard(board, color) {
         value -= FIGURE_VALUE[type];  
         //position score
         if(isWhite) {
-          value -= POSITION_SCORE_W[type][index];
+          value -= POSITION_SCORE_W[type][i];
         } else {
-          value -= POSITION_SCORE_B[type][index]; 
+          value -= POSITION_SCORE_B[type][i]; 
         } 
+        
       }     
   }
   
   return value;
 }
-

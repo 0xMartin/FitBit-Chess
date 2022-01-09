@@ -1,4 +1,5 @@
 import * as document from "document";
+import { settingsStorage } from "settings";
 
 import * as utils from "./utils";
 import * as figure from "../../common/figure";
@@ -8,6 +9,7 @@ import * as comm from "../../common/communication";
 //control
 export var event_game_end = null;
 var ai_enabled = false;
+var ai_isWhite = false;
 
 //game data
 var board = [];
@@ -53,8 +55,8 @@ function changePlayer() {
   }
   
   //ai play
-  if(!white_on_turn) {
-    if(ai_enabled) {
+  if(ai_enabled) {
+    if(white_on_turn == ai_isWhite) {
       comm.sendBoardData(board);
     }
   }
@@ -77,7 +79,7 @@ function figure_event(fig) {
   } 
   
   //only currently playing player can select figure ...
-  if(ai_enabled && !white_on_turn) return;  //is AI is enabled => you cant play with black player
+  if(ai_enabled && white_on_turn == ai_isWhite) return;  //is AI is enabled => you cant play with black player
   
   //select figure
   selected_figure = fig;  
@@ -233,20 +235,16 @@ export function init() {
   //update board
   updateBoard(board);
   
-  //reset
-  white_on_turn = true;
-  selected_figure = null;
+  //sync with mobile
+  comm.requestSettingsSync();
 }
 
 
 export function run() {
   //RUN GAME
+  selected_figure = null;
   white_on_turn = true; 
 }
-
-//###################################################################################################################
-// AI
-//###################################################################################################################
 
 export function enableAI() {
   ai_enabled = true;  
@@ -257,31 +255,48 @@ export function disableAI() {
 }
 
 comm.receivMsgEvt = function (evt) {
-  if(ai_enabled) {
-    if(!white_on_turn) {
-      
-      const from = evt.data.from;
-      const to = evt.data.to;
-  
-      selected_figure = new figure.Figure(from.x, from.y, board[from.x + from.y * 8]);
-      if(!move_event(to.x, to.y)) {
-        //error 
-        console.log("!!! AI ERROR !!!");
-        console.log("[" + from.x + ", " + from.y + "] -> [" + to.x + ", " + to.y + "]");
-        //stop game
-        info.style.display = "inline";  
-        info.text ="AI give up!";
-        white_on_turn = true;
-        //return back to main menu
-        setTimeout(() => {
-          info.style.display = "none"; 
-          if(event_game_end != null) {
-            event_game_end();  
-          }
-        }, 5000);  
+  switch(evt.data.type) {
+    case comm.AI_MOVE:
+      //AI MOVE
+      if(ai_enabled) {
+        if(white_on_turn == ai_isWhite) {
+
+          const from = evt.data.msg.from;
+          const to = evt.data.msg.to;
+          //console.log("WATCH: AI MOVE [" + from.x + ", " + from.y + "] -> [" + to.x + ", " + to.y + "]");
+          
+          selected_figure = new figure.Figure(from.x, from.y, board[from.x + from.y * 8]);
+          if(!move_event(to.x, to.y)) {
+            //error 
+            //console.log("WATCH: !!! AI ERROR !!!");
+            //stop game
+            info.style.display = "inline";  
+            info.text ="AI give up!";
+            white_on_turn = true;
+            //return back to main menu
+            setTimeout(() => {
+              info.style.display = "none"; 
+              if(event_game_end != null) {
+                event_game_end();  
+              }
+            }, 5000);  
+          }  
+        }
       }
+      break;
+    case comm.SETTINGS_SYNC:
+      const settings = evt.data.msg;
+      //change color of ai
+      ai_isWhite = settings.is_white;
+      //console.log("WATCH: COLOR OF AI CHANGED: " + ai_isWhite);
       
-    }
+        //ai play
+        if(ai_enabled) {
+          if(white_on_turn == ai_isWhite) {
+            comm.sendBoardData(board);
+          }
+        }
+      break;
   }
 }
 
