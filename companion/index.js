@@ -14,6 +14,13 @@ const LOAD_FEN = "load_fen";
 const FEN_STR = "fen_str";
 
 
+//first settings storage init
+if(settingsStorage.getItem(AI_LEVEL) == null) {
+  console.log("First settings storage init");
+  settingsStorage.setItem(AI_LEVEL, 2);
+}
+
+
 //AI
 var chess_ai = new ai.AI(parseInt(settingsStorage.getItem(AI_LEVEL)) + 1, 
                          settingsStorage.getItem(AI_COLOR) == "true");

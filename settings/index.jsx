@@ -11,6 +11,7 @@ function ChessSettings(props) {
           settingsKey="ai_level"
           min="1"
           max="3"
+          defaultValue="2"
         />
         <Text>Level: {props.settingsStorage.getItem('ai_level')}</Text>
 
