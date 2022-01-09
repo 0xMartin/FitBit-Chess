@@ -1,6 +1,6 @@
 # FitBit-Chess
 
-This game allows two modes of game. The first mode "player vs player" allows you to play against another player on the same device. The second mode "AI" turn on an artificial intelligence that will play as a black player. The game shows you how you can move with individual figures and warns you if the move is not a legal "king under attack". If the checkmate occurs, the game is automatically terminated and the winners of the game is displayed. A connection to the telephone is required to play in AI (all AI calculations are performed on the telephone).
+This game allows two modes of game. The first mode "player vs player" allows you to play against another player on the same device. The second mode "AI" turn on an artificial intelligence that will play as a black player. The game shows you how you can move with individual figures and warns you if the move is not a legal "king under attack". If the checkmate occurs, the game is automatically terminated and the winners of the game is displayed. The color gradient in the background changes depending on which player is on the turn. So it is easy to be able to see which player is on the turn. A connection to the telephone is required to play in AI (all AI calculations are performed on the telephone).
 
 ## Control
   * __"player vs player" mode:__ Press Play button
