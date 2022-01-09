@@ -8,7 +8,7 @@ This game allows two modes of game. The first mode "player vs player" allows you
   * To return to the __main menu__ or __end the game prematurely__, it is necessary to close the application and turn it on again
   
 ## Setting
-  * You can set the chessboard colors on your phone. it is also possible to set the performance of artificial intelligence (level 1 - 4)
+  * You can set the chessboard colors on your phone. it is also possible to set the performance of artificial intelligence (level 1 - 3)
 
 ## Screenshots
 <div class="d-flex justify-content-between">
