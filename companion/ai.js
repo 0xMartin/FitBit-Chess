@@ -18,6 +18,10 @@ export class AI {
   solve() {
     if(this.board == null) return;
     
+    //time start
+    var start = new Date().getTime();
+    
+    
     var bestValue = Number.NEGATIVE_INFINITY;
     var bestMov = {from: null, to: null};
 
@@ -34,6 +38,12 @@ export class AI {
       }
       
     }
+    
+    
+    //time end
+    var end = new Date().getTime();
+    var time = end - start;
+    console.log("Time: " + time + " ms");
     
     return bestMov;
   }
@@ -113,7 +123,8 @@ function getMoves(board, color) {
 }
 
 //## EVALUATOR [START] #################################################################################
-const POSITION_SCORE = {
+
+const POSITION_SCORE_W = {
     'p':[
             100, 100, 100, 100, 105, 100, 100,  100,
               78,  83,  86,  73, 102,  82,  85,  90,
@@ -176,41 +187,62 @@ const POSITION_SCORE = {
         ]
 };
 
+const POSITION_SCORE_B = {
+    'p': POSITION_SCORE_W['p'].slice().reverse(),
+    'n': POSITION_SCORE_W['n'].slice().reverse(),
+    'b': POSITION_SCORE_W['b'].slice().reverse(),
+    'r': POSITION_SCORE_W['r'].slice().reverse(),
+    'q': POSITION_SCORE_W['q'].slice().reverse(),
+    'k': POSITION_SCORE_W['k'].slice().reverse()
+}
+
 // FIGURE_VALUE[figure.type]
 const FIGURE_VALUE = {
   'p' : 100,     //PAWN
   'r' : 479,     //ROOK
   'n' : 280,     //KNIGHT
-  'b' : 35,      //BISHOP
-  'k' : 99999,   //KING
+  'b' : 320,     //BISHOP
+  'k' : 88888,   //KING
   'q' : 929      //QUEEN
 };
 
+
 function evaluateBoard(board, color) {
   var value = 0;
-  
-  for(var x = 0; x < 8; x++) {
-    for(var y = 0; y < 8; y++) {
-      var fig = board[x + y * 8];
-      if(figure.isEmpty(fig)) continue;
+ 
+  var fig;
+  for(var index = 0; index < 64; index++) {
+      fig = board[index];
+      if(fig == ' ') continue;
       
-      var isWhite = figure.isWhite(fig);
-      var type = fig.toLowerCase();
+      var type = fig.toLowerCase(); 
+      var isWhite = (fig == fig.toUpperCase());
       
-      var sign = ((isWhite == color) ? 1 : -1);
-      
-      //material score
-      value += FIGURE_VALUE[type] * sign;
-      
-      //position score
-      if(isWhite) {
-        value += POSITION_SCORE[type][x + y * 8] * sign;
+      if(isWhite == color) {
+        //AI (positive values)
+        
+        //material score
+        value += FIGURE_VALUE[type];  
+        //position score
+        if(isWhite) {
+          value += POSITION_SCORE_W[type][index];
+        } else {
+          value += POSITION_SCORE_B[type][index]; 
+        }
       } else {
-        value += POSITION_SCORE[type][x + (7 - y) * 8] * sign; 
-      }
-    }
+        //ENEMY (negative values)
+        
+        //material score
+        value -= FIGURE_VALUE[type];  
+        //position score
+        if(isWhite) {
+          value -= POSITION_SCORE_W[type][index];
+        } else {
+          value -= POSITION_SCORE_B[type][index]; 
+        } 
+      }     
   }
-   
+  
   return value;
 }
 
