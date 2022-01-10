@@ -11,6 +11,9 @@ This game allows two modes of game. The first mode "player vs player" allows you
   * You can set the chessboard colors on your phone. it is also possible to set the performance of artificial intelligence (level 1 - 3)
   * You can set the color of AI
   * Load FEN from settings
+<div class="d-flex justify-content-between">
+  <img src="./doc/settings.png" width="30%">
+</div>
 
 ## Screenshots
 <div class="d-flex justify-content-between">
