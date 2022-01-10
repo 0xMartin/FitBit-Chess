@@ -70,6 +70,12 @@ function minMax(depth, board, color, isMaximizingPlayer, alpha, beta) {
     
       //do move
       var status = figure.doMove(mov, board);
+    
+      //king killed
+      if(figure.isKing(status.killed)) {
+        figure.undoMove(mov, board, status);
+        return isMaximizingPlayer ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY;
+      }
      
       //min max
       var current = minMax(depth - 1, board, color, !isMaximizingPlayer, alpha, beta);

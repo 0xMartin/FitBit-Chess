@@ -15,6 +15,7 @@ var ai_isWhite = false;
 var board = [];
 var white_on_turn = true;
 var selected_figure = null;
+var game_over = false;
 
 var figures = null;
 var fields = null;
@@ -43,7 +44,7 @@ function changePlayer() {
     //game over
     info.style.display = "inline";  
     info.text = (white_on_turn ? "Black" : "White") + " win!";
-    white_on_turn = true;
+    game_over = true;
     
     //return back to main menu
     setTimeout(() => {
@@ -72,6 +73,7 @@ function clearFields(all) {
 }
 
 function figure_event(fig) {
+  if(game_over) return;
   if(figure.isWhite(fig.type) != white_on_turn) {
     //move with figure
     move_event(fig.x, fig.y);
@@ -95,6 +97,7 @@ function figure_event(fig) {
 }
 
 function move_event(x, y) {
+  if(game_over) return;
   if(selected_figure != null) {
     const from = {x: selected_figure.x, y: selected_figure.y};
     const to = {x: x, y: y};
@@ -202,9 +205,9 @@ function updateBoard(board) {
 
 function loadBoardFromFEN(fen) {
   var board_index = 0;
-  console.log(": " + fen);
   
-  for (var i = 0; i < fen.length; i++) {
+  var i;
+  for (i = 0; i < fen.length; i++) {
     if(board_index > 63) break;
     
     var c = fen.charAt(i).toLowerCase();
@@ -217,6 +220,8 @@ function loadBoardFromFEN(fen) {
         board[board_index] = ' ';
         board_index++;  
       } 
+    } else if(c == ' ') { 
+      break;  
     } else {
       const parsed = parseInt(c);
       if (!isNaN(parsed)) { 
@@ -229,7 +234,20 @@ function loadBoardFromFEN(fen) {
       }  
     }
     
-  }   
+  }
+
+  if(i + 1 < fen.length) {
+    if(fen[i + 1].toLowerCase() == 'w') {
+      white_on_turn = false; 
+      changePlayer();
+    }
+
+    if(fen[i + 1].toLowerCase() == 'b') {
+      white_on_turn = true; 
+      changePlayer();
+    }
+  }
+
 
   updateBoard(board);
 }
@@ -279,6 +297,7 @@ export function run() {
   //RUN GAME
   selected_figure = null;
   white_on_turn = true; 
+  game_over = false;
 }
 
 export function enableAI() {
