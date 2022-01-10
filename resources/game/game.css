@@ -23,6 +23,10 @@
   fill: #77BB88;   
 }
 
+.move {
+  fill: #FFF55A;   
+}
+
 .king_danger {
   fill: #882233;   
 }
@@ -39,17 +43,27 @@
   pointer-events: "visible";
 }
 
-#info {
+#win_w {
   x: "50%";
   y: "50%+15";
   font-family: "System-Regular"; 
-  fill: blue;
+  fill: #DF6C00;
+  font-size: "30"; 
+  font-weight: "bold";
+  text-anchor: "middle";
+
+}
+
+#win_b {
+  x: "50%";
+  y: "50%+15";
+  font-family: "System-Regular"; 
+  fill: #DF6C00;
   font-size: "30"; 
   font-weight: "bold";
   text-anchor: "middle";
   display: "none";
 }
-
 
 /*WHITE FIGURES */
 .figure.w_pawn {

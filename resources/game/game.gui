@@ -10,7 +10,7 @@
         class="bg_white_on_turn" />
 
       <!-- GAME BOARD -->
-      <svg id="board" x="8%" y="8%" width="84%" height="84%" pointer-events="visible"> 
+      <svg id="board" x="8%" y="8%" width="84%" height="84%"> 
 
          <!-- WHITE BG -->
         <rect x="1%" y="1%" width="98%" height="98%" class="board_outline" />
@@ -216,10 +216,12 @@
         <rect x="86%" y="86%" class="white_field field" />
         <image x="86%" y="86%" class="figure" />
         
-
         <!-- WIN TAG -->
-        <text id="info">WHITE PLAYER WIN</text>   
+        <text id="win_w">🏆 WHITE WIN 🏆</text> 
+        <text id="win_b">🏆 BLACK WIN 🏆</text>
+        
       </svg>
+     
     </svg>
   </symbol>
 

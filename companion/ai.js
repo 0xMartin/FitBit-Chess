@@ -27,20 +27,31 @@ export class AI {
     var bestMov = {from: null, to: null};
 
     var moves = getMoves(this.board, this.color);
-    for(var i = 0; i < moves.length; i++){
-      
+    
+    for(var i = 0; i < moves.length; i++){    
       var status = figure.doMove(moves[i], this.board);
       var val = minMax(this.depth - 1, this.board, this.color, false, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY);
       figure.undoMove(moves[i], this.board, status);
       
-      if(bestValue < val) {
+      if(bestValue < val || bestMov.from == null) {
         bestValue = val;
         bestMov = moves[i];
-      }
-      
+      }     
     }
     
-    
+    if(bestValue == Number.NEGATIVE_INFINITY) {
+      for(var i = 0; i < moves.length; i++){
+        var status = figure.doMove(moves[i], this.board);
+        var val = minMax(1, this.board, this.color, false, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY);
+        figure.undoMove(moves[i], this.board, status);
+        
+        if(bestValue < val) {
+          bestValue = val;
+          bestMov = moves[i];
+        }
+      } 
+    }
+ 
     //time end
     var end = new Date().getTime();
     var time = end - start;
@@ -59,7 +70,8 @@ function minMax(depth, board, color, isMaximizingPlayer, alpha, beta) {
   var possible_moves = getMoves(board, (isMaximizingPlayer ? color : !color));
   
   if(possible_moves.length == 0) {
-    return evaluateBoard(board, color);  
+    //pat
+    return isMaximizingPlayer ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY;
   }
     
   

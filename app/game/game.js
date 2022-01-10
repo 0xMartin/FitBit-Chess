@@ -22,7 +22,8 @@ var fields = null;
 
 //ui components
 const bg = document.getElementById("bg");
-const info = document.getElementById("info");
+const win_w = document.getElementById("win_w");
+const win_b = document.getElementById("win_b");
 const board = document.getElementById("board"); 
 
 
@@ -42,17 +43,23 @@ function changePlayer() {
   //test chess met
   if(figure.checkChessMet(white_on_turn, board)) {
     //game over
-    info.style.display = "inline";  
-    info.text = (white_on_turn ? "Black" : "White") + " win!";
+    if(white_on_turn) {
+      win_b.style.display = "inline";  
+    } else {
+      win_w.style.display = "inline";   
+    }
     game_over = true;
     
     //return back to main menu
     setTimeout(() => {
-      info.style.display = "none"; 
+      win_w.style.display = "none";
+      win_b.style.display = "none"; 
       if(event_game_end != null) {
         event_game_end();  
       }
     }, 5000);
+    
+    return;
   }
   
   //ai play
@@ -66,6 +73,7 @@ function changePlayer() {
 function clearFields(all) {
   fields.forEach((f) => {
     utils.removeClass(f, "possible_move");
+    utils.removeClass(f, "move");
     if(all) {
       utils.removeClass(f, "king_danger");
     }
@@ -125,6 +133,10 @@ function move_event(x, y) {
       
       //update board
       updateBoard(board);
+      
+      //highlight move
+      utils.addClass(fields[from.x + from.y * 8], "move");
+      utils.addClass(fields[to.x + to.y * 8], "move");
       
       //change player
       changePlayer();
@@ -298,6 +310,8 @@ export function run() {
   selected_figure = null;
   white_on_turn = true; 
   game_over = false;
+  win_w.style.display = "none";
+  win_b.style.display = "none"; 
 }
 
 export function enableAI() {
@@ -322,18 +336,22 @@ comm.receivMsgEvt = function (evt) {
           selected_figure = new figure.Figure(from.x, from.y, board[from.x + from.y * 8]);
           if(!move_event(to.x, to.y)) {
             //error 
-            //console.log("WATCH: !!! AI ERROR !!!");
-            //stop game
-            info.style.display = "inline";  
-            info.text ="AI give up!";
-            white_on_turn = true;
+            //game over
+            if(white_on_turn) {
+              win_w.style.display = "inline";  
+            } else {
+              win_b.style.display = "inline";   
+            }
+            game_over = true;
+
             //return back to main menu
             setTimeout(() => {
-              info.style.display = "none"; 
+              win_w.style.display = "none";
+              win_b.style.display = "none"; 
               if(event_game_end != null) {
                 event_game_end();  
               }
-            }, 5000);  
+            }, 5000);
           }  
         }
       }
